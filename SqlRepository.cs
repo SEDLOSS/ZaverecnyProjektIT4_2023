@@ -70,28 +70,88 @@ namespace ZaverecnyProjektIT4_2023
             conn.Close();
         }
 
-        public static void AddRole(string roleName)
+        public static void AddContract(int contractNumber, string Customer, string Description)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand("INSERT INTO roles (roleName) VALUES (@roleName)", conn);
-                cmd.Parameters.AddWithValue("@roleName", roleName);
-
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    Console.WriteLine("Role added successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Role could not be added.");
-                }
-            }
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "INSERT INTO contracts (ContractNumber, Customer, Description) VALUES (@ContractNumber, @Customer, @Description)";
+            cmd.Parameters.AddWithValue("ContractNumber", contractNumber);
+            cmd.Parameters.AddWithValue("Customer", Customer); ;
+            cmd.Parameters.AddWithValue("Description", Description);
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
+        public static Contract GetContractByNumber(int contractNumber)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT * FROM contracts WHERE ContractNumber = @ContractNumber";
+            cmd.Parameters.AddWithValue("ContractNumber", contractNumber);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Contract contract = null;
+            if (reader.Read())
+            {
+                contract = new Contract(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3));
+            }
+            reader.Close();
+            conn.Close();
+            return contract;
+        }
+
+        public static List<Contract> GetContractsByUser(int iD)
+        {
+            List<Contract> contracts = new List<Contract>();
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT * FROM Contracts c INNER JOIN iD ON c.ContractNumber = iD WHERE iD = @iD";
+            cmd.Parameters.AddWithValue("iD", iD);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                contracts.Add(new Contract(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3)));
+            }
+            reader.Close();
+            conn.Close();
+            return contracts;
+        }
+
+        public static void DeleteContractsFromActualDay(int contractNumber)
+        {
+            DateTime now = DateTime.Now;
+            DateTime startOfToday = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+            DateTime endOfToday = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
+
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM contracts WHERE ContractNumber = @ContractNumber AND CreatedDate BETWEEN @StartOfToday AND @EndOfToday";
+            cmd.Parameters.AddWithValue("contractNumber", contractNumber);
+            cmd.Parameters.AddWithValue("StartOfToday", startOfToday);
+            cmd.Parameters.AddWithValue("EndOfToday", endOfToday);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static List<Contract> GetContractsOrderedByCreatedDay()
+        {
+            List<Contract> contracts = new List<Contract>();
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT * FROM Contracts ORDER BY CreatedDate";
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                contracts.Add(new Contract(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3)));
+            }
+            reader.Close();
+            conn.Close();
+            return contracts;
+        }
 
 
     }
