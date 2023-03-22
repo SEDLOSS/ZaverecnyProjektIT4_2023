@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZaverecnyProjektIT4_2023.classes
 {
-    internal class Role
+    public class Role
     {
         public string Name { get; set; }
 

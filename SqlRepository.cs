@@ -24,7 +24,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                users.Add(new User(reader.GetString(1), (byte[])reader[2], (byte[])reader[3]));
+                users.Add(new User(reader.GetInt32(0), reader.GetString(1), (byte[])reader[2], (byte[])reader[3]));
             }
             reader.Close();
             conn.Close();
@@ -44,5 +44,55 @@ namespace ZaverecnyProjektIT4_2023
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+
+        public static void DeleteUser(int iD)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM users WHERE iD = @iD";
+            cmd.Parameters.AddWithValue("iD", iD);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void UpdateUser(string iD, string password)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            HMACSHA512 hmac = new HMACSHA512();
+            cmd.CommandText = "UPDATE users SET passwordhash=@hash, passwordsalt=@salt WHERE iD=@iD";
+            cmd.Parameters.AddWithValue("iD", iD);
+            cmd.Parameters.AddWithValue("hash", hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
+            cmd.Parameters.AddWithValue("salt", hmac.Key);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static void AddRole(string roleName)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO roles (roleName) VALUES (@roleName)", conn);
+                cmd.Parameters.AddWithValue("@roleName", roleName);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Role added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Role could not be added.");
+                }
+            }
+        }
+
+
+
     }
 }

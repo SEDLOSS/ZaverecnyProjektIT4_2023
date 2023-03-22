@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZaverecnyProjektIT4_2023.classes
 {
-    internal class Contract
+    public class Contract
     {
         public int ContactNumber { get; set; }
         public string Customer { get; set; }

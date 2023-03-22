@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZaverecnyProjektIT4_2023.classes
 {
-    internal class WorkHours
+    public class WorkHours
     {
         public Employee Employee { get; set; }
         public Contract Contract { get; set; }

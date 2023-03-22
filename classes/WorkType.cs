@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZaverecnyProjektIT4_2023.classes
 {
-    internal class WorkType
+    public class WorkType
     {
         public string Name { get; set; }
         public string Description { get; set; }

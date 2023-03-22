@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZaverecnyProjektIT4_2023.classes
 {
-    internal class Employee
+    public class Employee
     {
         public int PersonalNumber { get; set; }
         public string FirstName { get; set; }
