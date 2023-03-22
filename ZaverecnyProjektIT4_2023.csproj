@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\Contract.cs" />
+    <Compile Include="classes\Employee.cs" />
+    <Compile Include="classes\Role.cs" />
+    <Compile Include="classes\User.cs" />
+    <Compile Include="classes\WorkHours.cs" />
+    <Compile Include="classes\WorkType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
