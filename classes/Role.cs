@@ -9,10 +9,12 @@ namespace ZaverecnyProjektIT4_2023.classes
     public class Role
     {
         public string Name { get; set; }
+        public int RoleID { get; set; }
 
-        public Role(string name)
+        public Role(string name, int roleID)
         {
             Name = name;
+            RoleID = roleID;
         }
     }
 }
