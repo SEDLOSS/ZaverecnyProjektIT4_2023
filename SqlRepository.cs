@@ -24,7 +24,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                users.Add(new User(reader.GetInt32(0), reader.GetString(1), (byte[])reader[2], (byte[])reader[3]));
+                users.Add(new User(reader.GetInt32(0), reader.GetString(1), (byte[])reader[2], (byte[])reader[3], reader.GetInt32(4)));
             }
             reader.Close();
             conn.Close();
@@ -152,6 +152,7 @@ namespace ZaverecnyProjektIT4_2023
             conn.Close();
             return contracts;
         }
+
 
 
     }

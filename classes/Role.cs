@@ -8,13 +8,15 @@ namespace ZaverecnyProjektIT4_2023.classes
 {
     public class Role
     {
+        public int ID { get; set; }
         public string Name { get; set; }
-        public int RoleID { get; set; }
+        public bool Permission { get; set; }
 
-        public Role(string name, int roleID)
+        public Role(int iD, string name, bool permission)
         {
+            ID = iD;
             Name = name;
-            RoleID = roleID;
+            Permission = permission;
         }
     }
 }

@@ -16,5 +16,10 @@ namespace ZaverecnyProjektIT4_2023
         {
             InitializeComponent();
         }
+
+
+
+
+
     }
 }
