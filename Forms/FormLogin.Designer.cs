@@ -37,17 +37,18 @@
             // 
             // loginbutton
             // 
-            this.loginbutton.Location = new System.Drawing.Point(60, 221);
+            this.loginbutton.Location = new System.Drawing.Point(69, 221);
             this.loginbutton.Name = "loginbutton";
             this.loginbutton.Size = new System.Drawing.Size(75, 23);
             this.loginbutton.TabIndex = 0;
             this.loginbutton.Text = "Přihlásit";
             this.loginbutton.UseVisualStyleBackColor = true;
+            this.loginbutton.Click += new System.EventHandler(this.loginbutton_Click_1);
             // 
             // namelabel
             // 
             this.namelabel.AutoSize = true;
-            this.namelabel.Location = new System.Drawing.Point(76, 50);
+            this.namelabel.Location = new System.Drawing.Point(92, 52);
             this.namelabel.Name = "namelabel";
             this.namelabel.Size = new System.Drawing.Size(38, 13);
             this.namelabel.TabIndex = 1;
@@ -55,22 +56,23 @@
             // 
             // nametextBox
             // 
-            this.nametextBox.Location = new System.Drawing.Point(36, 85);
+            this.nametextBox.Location = new System.Drawing.Point(47, 85);
             this.nametextBox.Name = "nametextBox";
             this.nametextBox.Size = new System.Drawing.Size(125, 20);
             this.nametextBox.TabIndex = 2;
             // 
             // passwordtextBox
             // 
-            this.passwordtextBox.Location = new System.Drawing.Point(36, 152);
+            this.passwordtextBox.Location = new System.Drawing.Point(47, 158);
             this.passwordtextBox.Name = "passwordtextBox";
             this.passwordtextBox.Size = new System.Drawing.Size(125, 20);
             this.passwordtextBox.TabIndex = 3;
+            this.passwordtextBox.UseSystemPasswordChar = true;
             // 
             // passwordlabel
             // 
             this.passwordlabel.AutoSize = true;
-            this.passwordlabel.Location = new System.Drawing.Point(79, 126);
+            this.passwordlabel.Location = new System.Drawing.Point(92, 130);
             this.passwordlabel.Name = "passwordlabel";
             this.passwordlabel.Size = new System.Drawing.Size(34, 13);
             this.passwordlabel.TabIndex = 4;
@@ -80,13 +82,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(202, 277);
+            this.ClientSize = new System.Drawing.Size(217, 277);
             this.Controls.Add(this.passwordlabel);
             this.Controls.Add(this.passwordtextBox);
             this.Controls.Add(this.nametextBox);
             this.Controls.Add(this.namelabel);
             this.Controls.Add(this.loginbutton);
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.ShowIcon = false;
             this.Text = "Přihlášení";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ZaverecnyProjektIT4_2023
 {
-    public partial class Form1 : Form
+    public partial class FormContractADD : Form
     {
-        public Form1()
+        public FormContractADD()
         {
             InitializeComponent();
         }
-
-
-
-
-
     }
 }

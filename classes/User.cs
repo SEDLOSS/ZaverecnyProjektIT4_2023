@@ -14,9 +14,9 @@ namespace ZaverecnyProjektIT4_2023.classes
         public byte[] Salt { get; set; }
         public int Roleid { get; set; }
 
-        public User(int iD, string name, byte[] hash, byte[] salt, int roleid)
+        public User(int id, string name, byte[] hash, byte[] salt, int roleid)
         {
-            ID = iD;
+            ID = id;
             Name = name;
             Hash = hash;
             Salt = salt;
