@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace ZaverecnyProjektIT4_2023
 {
-    public partial class RegistrationForm : Form
+    public partial class FormEmployeeAdd : Form
     {
-        public RegistrationForm()
+        public FormEmployeeAdd()
         {
             InitializeComponent();
         }
@@ -63,8 +63,13 @@ namespace ZaverecnyProjektIT4_2023
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            string name = nameTextBox.Text;
-            string password = passwordTextBox.Text;
+            string name = Nametxt.Text;
+            string password = Name1txt.Text;
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

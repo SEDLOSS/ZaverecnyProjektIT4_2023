@@ -12,12 +12,12 @@ using System.Windows.Forms;
 
 namespace ZaverecnyProjektIT4_2023
 {
-    public partial class Form1 : Form
+    public partial class FormLogin : Form
     {
-        public Form1()
+        public FormLogin()
         {
             InitializeComponent();
-            var RegfistrationForm = new RegistrationForm();
+            var RegfistrationForm = new FormEmployeeAdd();
             RegfistrationForm.Show();
 
 
@@ -68,8 +68,8 @@ namespace ZaverecnyProjektIT4_2023
 
         private void loginbutton_Click_1(object sender, EventArgs e)
         {
-            string name = nametextBox.Text;
-            string password = passwordtextBox.Text;
+            string name = Nametxt.Text;
+            string password = Passwordtxt.Text;
 
             if (AuthenticateUser(name, password))
             {

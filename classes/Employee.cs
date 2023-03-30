@@ -13,9 +13,9 @@ namespace ZaverecnyProjektIT4_2023.classes
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public Employee(int id, string firstName, string lastName, DateTime birthDate, string email, int phoneNumber)
+        public Employee(int id, string firstName, string lastName, DateTime birthDate, string email, string phoneNumber)
         {
             Id = id;
             FirstName = firstName;
