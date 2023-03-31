@@ -18,5 +18,10 @@ namespace ZaverecnyProjektIT4_2023.classes
             Customer = customer;
             Description = description;
         }
+        public Contract(string customer, string description)
+        {
+            Customer = customer;
+            Description = description;
+        }
     }
 }

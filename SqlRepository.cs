@@ -34,6 +34,7 @@ namespace ZaverecnyProjektIT4_2023
         public static List<Employee> EmployeeList()
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "SELECT * FROM Employees";
             SqlDataReader reader = cmd.ExecuteReader();
@@ -50,6 +51,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void DeleteEmployeebyId(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "DELETE FROM Employees WHERE Id=@id";
             cmd.Parameters.AddWithValue("id", id);
@@ -60,6 +62,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void AddEmployee(Employee employee)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "INSERT INTO Employees (FirstName, LastName, BirthDate, Email, PhoneNumber) VALUES (@firstname, @lastname, @birthdate, @email, @phonenumber)";
             cmd.Parameters.AddWithValue("firstname", employee.FirstName);
@@ -74,6 +77,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void EditEmployee(int id, Employee employee)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "UPDATE Employees SET FirstName=@firstname, LastName=@lastname, BirthDate=@birthdate, Email=@email, PhoneNumber=@phonenumber WHERE id=@id";
             cmd.Parameters.AddWithValue("id", id);
@@ -89,6 +93,7 @@ namespace ZaverecnyProjektIT4_2023
         public static List<Contract> ContractList()
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "SELECT * FROM Contract";
             SqlDataReader reader = cmd.ExecuteReader();
@@ -105,6 +110,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void AddContract(Contract contract)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "INSERT INTO Contract (Customer, Description) VALUES (@customer, @description)";
             cmd.Parameters.AddWithValue("customer", contract.Customer);
@@ -116,6 +122,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void EditContract(int id, Contract contract)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "UPDATE Contract SET Customer=@customer, Description=@description WHERE id=@id";
             cmd.Parameters.AddWithValue("id", id);
@@ -128,6 +135,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void DeleteContractbyId(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "DELETE FROM Contract WHERE Id=@id";
             cmd.Parameters.AddWithValue("id", id);
@@ -139,6 +147,7 @@ namespace ZaverecnyProjektIT4_2023
 
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "SELECT * FROM Worktypes";
             SqlDataReader reader = cmd.ExecuteReader();
@@ -155,6 +164,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void AddWorktype(WorkType worktype)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "INSERT INTO Worktypes (Name, Description) VALUES (@name, @description)";
             cmd.Parameters.AddWithValue("name", worktype.Name);
@@ -166,6 +176,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void EditWorktype(int id, WorkType worktype)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "UPDATE Worktypes SET Name=@name, Description=@description WHERE id=@id";
             cmd.Parameters.AddWithValue("id", id);
@@ -178,6 +189,7 @@ namespace ZaverecnyProjektIT4_2023
         public static void DeleteWorktypebyId(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = "DELETE FROM Worktypes WHERE Id=@id";
             cmd.Parameters.AddWithValue("id", id);

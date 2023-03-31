@@ -18,5 +18,11 @@ namespace ZaverecnyProjektIT4_2023.classes
             Name = name;
             Description = description;
         }
+
+        public WorkType(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
     }
 }

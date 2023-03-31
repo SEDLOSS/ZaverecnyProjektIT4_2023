@@ -61,6 +61,7 @@
             this.Addbtn.TabIndex = 2;
             this.Addbtn.Text = "button1";
             this.Addbtn.UseVisualStyleBackColor = true;
+            this.Addbtn.Click += new System.EventHandler(this.Addbtn_Click);
             // 
             // label2
             // 
