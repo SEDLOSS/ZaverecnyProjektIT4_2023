@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZaverecnyProjektIT4_2023.classes;
 
 namespace ZaverecnyProjektIT4_2023
 {
@@ -20,7 +21,7 @@ namespace ZaverecnyProjektIT4_2023
 
         public FormContractADD(Contract contract)
         {
-            id = contract.ID;
+            id = contract.Id;
             InitializeComponent();
             Customertxt.Text = contract.Customer;
             Desctriptiontxt.Text = contract.Description;

@@ -111,14 +111,14 @@ namespace ZaverecnyProjektIT4_2023
             updatecontracts();
         }
 
-        //private void ContractEdtbtn_Click(object sender, EventArgs e)
-        //{
-        //    Form formContract = new FormContractADD(contracts[ContractListview.SelectedIndices[0]]);
-        //    formContract.ShowDialog();
+        private void ContractEdtbtn_Click(object sender, EventArgs e)
+        {
+            Form formContract = new FormContractADD(contracts[ContractListview.SelectedIndices[0]]);
+            formContract.ShowDialog();
 
-        //    contracts = SqlRepository.ContractList();
-        //    updatecontracts();
-        //}
+            contracts = SqlRepository.ContractList();
+            updatecontracts();
+        }
 
         private void ContractListview_SelectedIndexChanged(object sender, EventArgs e)
         {

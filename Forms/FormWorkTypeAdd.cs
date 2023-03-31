@@ -41,5 +41,10 @@ namespace ZaverecnyProjektIT4_2023
 
             Close();
         }
+
+        private void Descriptiontxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

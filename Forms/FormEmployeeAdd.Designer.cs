@@ -48,7 +48,7 @@
             this.Addbtn.Name = "Addbtn";
             this.Addbtn.Size = new System.Drawing.Size(123, 36);
             this.Addbtn.TabIndex = 0;
-            this.Addbtn.Text = "Přidat zaměstnance";
+            this.Addbtn.Text = "Přidat/upravit zaměstnance";
             this.Addbtn.UseVisualStyleBackColor = true;
             this.Addbtn.Click += new System.EventHandler(this.registerButton_Click);
             // 

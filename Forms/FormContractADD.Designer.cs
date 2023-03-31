@@ -55,11 +55,11 @@
             // 
             // Addbtn
             // 
-            this.Addbtn.Location = new System.Drawing.Point(174, 224);
+            this.Addbtn.Location = new System.Drawing.Point(158, 224);
             this.Addbtn.Name = "Addbtn";
-            this.Addbtn.Size = new System.Drawing.Size(75, 23);
+            this.Addbtn.Size = new System.Drawing.Size(91, 42);
             this.Addbtn.TabIndex = 2;
-            this.Addbtn.Text = "button1";
+            this.Addbtn.Text = "přidat/upravit zakázku";
             this.Addbtn.UseVisualStyleBackColor = true;
             this.Addbtn.Click += new System.EventHandler(this.Addbtn_Click);
             // 

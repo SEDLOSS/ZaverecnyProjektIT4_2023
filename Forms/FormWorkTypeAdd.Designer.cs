@@ -87,6 +87,7 @@
             this.Descriptiontxt.Name = "Descriptiontxt";
             this.Descriptiontxt.Size = new System.Drawing.Size(153, 73);
             this.Descriptiontxt.TabIndex = 5;
+            this.Descriptiontxt.TextChanged += new System.EventHandler(this.Descriptiontxt_TextChanged);
             // 
             // FormWorkTypeAdd
             // 
