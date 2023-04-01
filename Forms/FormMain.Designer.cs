@@ -1,6 +1,6 @@
 ﻿namespace ZaverecnyProjektIT4_2023
 {
-    partial class main
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -85,6 +85,7 @@
             this.EmployeeEdtbtn.TabIndex = 2;
             this.EmployeeEdtbtn.Text = "Úprava zaměstnance";
             this.EmployeeEdtbtn.UseVisualStyleBackColor = true;
+            this.EmployeeEdtbtn.Click += new System.EventHandler(this.EmployeeEdtbtn_Click_1);
             // 
             // EmployeeDltbtn
             // 
@@ -94,6 +95,7 @@
             this.EmployeeDltbtn.TabIndex = 3;
             this.EmployeeDltbtn.Text = "Smazání zaměstnance";
             this.EmployeeDltbtn.UseVisualStyleBackColor = true;
+            this.EmployeeDltbtn.Click += new System.EventHandler(this.EmployeeDltbtn_Click_1);
             // 
             // ContractAddbtn
             // 
@@ -103,6 +105,7 @@
             this.ContractAddbtn.TabIndex = 4;
             this.ContractAddbtn.Text = "Přidání zakázky";
             this.ContractAddbtn.UseVisualStyleBackColor = true;
+            this.ContractAddbtn.Click += new System.EventHandler(this.ContractAddbtn_Click_1);
             // 
             // ContractEdtbtn
             // 
@@ -112,6 +115,8 @@
             this.ContractEdtbtn.TabIndex = 5;
             this.ContractEdtbtn.Text = "Úprava zakázky";
             this.ContractEdtbtn.UseVisualStyleBackColor = true;
+            this.ContractEdtbtn.VisibleChanged += new System.EventHandler(this.ContractEdtbtn_VisibleChanged);
+            this.ContractEdtbtn.Click += new System.EventHandler(this.ContractEdtbtn_Click_1);
             // 
             // ContractDltbtn
             // 
@@ -132,13 +137,17 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
+            this.EmployeeListview.FullRowSelect = true;
+            this.EmployeeListview.GridLines = true;
             this.EmployeeListview.HideSelection = false;
             this.EmployeeListview.Location = new System.Drawing.Point(19, 143);
+            this.EmployeeListview.MultiSelect = false;
             this.EmployeeListview.Name = "EmployeeListview";
-            this.EmployeeListview.Size = new System.Drawing.Size(644, 503);
+            this.EmployeeListview.Size = new System.Drawing.Size(641, 503);
             this.EmployeeListview.TabIndex = 7;
             this.EmployeeListview.UseCompatibleStateImageBehavior = false;
             this.EmployeeListview.View = System.Windows.Forms.View.Details;
+            this.EmployeeListview.SelectedIndexChanged += new System.EventHandler(this.EmployeeListview_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -176,13 +185,17 @@
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9});
+            this.ContractListview.FullRowSelect = true;
+            this.ContractListview.GridLines = true;
             this.ContractListview.HideSelection = false;
             this.ContractListview.Location = new System.Drawing.Point(779, 143);
+            this.ContractListview.MultiSelect = false;
             this.ContractListview.Name = "ContractListview";
             this.ContractListview.Size = new System.Drawing.Size(382, 503);
             this.ContractListview.TabIndex = 8;
             this.ContractListview.UseCompatibleStateImageBehavior = false;
             this.ContractListview.View = System.Windows.Forms.View.Details;
+            this.ContractListview.SelectedIndexChanged += new System.EventHandler(this.ContractListview_SelectedIndexChanged);
             // 
             // columnHeader7
             // 
@@ -205,13 +218,17 @@
             this.columnHeader10,
             this.columnHeader11,
             this.columnHeader12});
+            this.WorkListview.FullRowSelect = true;
+            this.WorkListview.GridLines = true;
             this.WorkListview.HideSelection = false;
             this.WorkListview.Location = new System.Drawing.Point(1278, 143);
+            this.WorkListview.MultiSelect = false;
             this.WorkListview.Name = "WorkListview";
             this.WorkListview.Size = new System.Drawing.Size(383, 503);
             this.WorkListview.TabIndex = 9;
             this.WorkListview.UseCompatibleStateImageBehavior = false;
             this.WorkListview.View = System.Windows.Forms.View.Details;
+            this.WorkListview.SelectedIndexChanged += new System.EventHandler(this.WorkListview_SelectedIndexChanged);
             // 
             // columnHeader10
             // 
@@ -236,6 +253,7 @@
             this.WorkAddbtn.TabIndex = 10;
             this.WorkAddbtn.Text = "Přidání práce";
             this.WorkAddbtn.UseVisualStyleBackColor = true;
+            this.WorkAddbtn.Click += new System.EventHandler(this.WorkAddbtn_Click_1);
             // 
             // WorkEdtbtn
             // 
@@ -245,6 +263,7 @@
             this.WorkEdtbtn.TabIndex = 11;
             this.WorkEdtbtn.Text = "Úprava práce";
             this.WorkEdtbtn.UseVisualStyleBackColor = true;
+            this.WorkEdtbtn.Click += new System.EventHandler(this.WorkEdtbtn_Click_1);
             // 
             // WorkDelbtn
             // 
@@ -254,6 +273,7 @@
             this.WorkDelbtn.TabIndex = 12;
             this.WorkDelbtn.Text = "Smazání Práce";
             this.WorkDelbtn.UseVisualStyleBackColor = true;
+            this.WorkDelbtn.Click += new System.EventHandler(this.WorkDelbtn_Click);
             // 
             // EmployeeSearchtxt
             // 
@@ -261,6 +281,7 @@
             this.EmployeeSearchtxt.Name = "EmployeeSearchtxt";
             this.EmployeeSearchtxt.Size = new System.Drawing.Size(188, 20);
             this.EmployeeSearchtxt.TabIndex = 13;
+            this.EmployeeSearchtxt.TextChanged += new System.EventHandler(this.EmployeeSearchtxt_TextChanged_1);
             // 
             // ContractSearchtxt
             // 
@@ -268,6 +289,7 @@
             this.ContractSearchtxt.Name = "ContractSearchtxt";
             this.ContractSearchtxt.Size = new System.Drawing.Size(188, 20);
             this.ContractSearchtxt.TabIndex = 14;
+            this.ContractSearchtxt.TextChanged += new System.EventHandler(this.ContractSearchtxt_TextChanged);
             // 
             // WorkSearchtxt
             // 
@@ -275,33 +297,34 @@
             this.WorkSearchtxt.Name = "WorkSearchtxt";
             this.WorkSearchtxt.Size = new System.Drawing.Size(188, 20);
             this.WorkSearchtxt.TabIndex = 15;
+            this.WorkSearchtxt.TextChanged += new System.EventHandler(this.WorkSearchtxt_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(232, 757);
+            this.label1.Location = new System.Drawing.Point(201, 757);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.Size = new System.Drawing.Size(127, 13);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Vyhledávání";
+            this.label1.Text = "Vyhledávání podle jména";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(941, 757);
+            this.label2.Location = new System.Drawing.Point(902, 757);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.Size = new System.Drawing.Size(127, 13);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Vyhledávání";
+            this.label2.Text = "Vyhledávání podle jména";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1440, 757);
+            this.label3.Location = new System.Drawing.Point(1413, 757);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.Size = new System.Drawing.Size(127, 13);
             this.label3.TabIndex = 18;
-            this.label3.Text = "Vyhledávání";
+            this.label3.Text = "Vyhledávání podle jména";
             // 
             // label4
             // 
@@ -363,7 +386,7 @@
             this.label8.TabIndex = 23;
             this.label8.Text = "Práce";
             // 
-            // main
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -391,7 +414,7 @@
             this.Controls.Add(this.EmployeeAddbtn);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.Name = "main";
+            this.Name = "FormMain";
             this.ShowIcon = false;
             this.Text = "Přehled";
             this.panel1.ResumeLayout(false);

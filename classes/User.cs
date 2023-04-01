@@ -10,17 +10,13 @@ namespace ZaverecnyProjektIT4_2023.classes
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public byte[] Hash { get; set; }
-        public byte[] Salt { get; set; }
-        public int Roleid { get; set; }
+        public Role Role { get; set; }
 
-        public User(int id, string name, byte[] hash, byte[] salt, int roleid)
+        public User(int id, string name, Role role)
         {
             ID = id;
             Name = name;
-            Hash = hash;
-            Salt = salt;
-            Roleid = roleid;
+            Role = role;
         }
     }
 }

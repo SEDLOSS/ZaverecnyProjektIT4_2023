@@ -24,7 +24,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                users.Add(new User(reader.GetInt32(0), reader.GetString(1), (byte[])reader[2], (byte[])reader[3], reader.GetInt32(4)));
+                users.Add(new User(reader.GetInt32(0), reader.GetString(1), GetRoleByID(reader.GetInt32(4))));
             }
             reader.Close();
             conn.Close();
@@ -73,6 +73,61 @@ namespace ZaverecnyProjektIT4_2023
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+
+        public static void ChangePassword(int id, string newpassword)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand command = conn.CreateCommand();
+            HMACSHA512 hmac = new HMACSHA512();
+            command.CommandText = "Update Users SET PasswordHash=@hash,PasswordSalt=@salt WHERE ID=@id";
+            command.Parameters.AddWithValue("hash", hmac.ComputeHash(Encoding.UTF8.GetBytes(newpassword)));
+            command.Parameters.AddWithValue("salt", hmac.Key);
+            command.Parameters.AddWithValue("id", id);
+            command.ExecuteNonQuery();
+            conn.Close();
+        }
+
+
+        public static Role GetRoleByID(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand command = conn.CreateCommand();
+            command.CommandText = "SELECT * FROM Role WHERE id=@id";
+            command.Parameters.AddWithValue("id", id);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                return new Role(reader.GetInt32(0),reader.GetString(1),reader.GetBoolean(2));
+            }
+            return null;
+        }
+
+        public static User CheckLogin(string username, string password)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlCommand command = conn.CreateCommand();
+            command.CommandText = "SELECT * FROM Users WHERE Name=@name";
+            command.Parameters.AddWithValue("name", username);
+            SqlDataReader reader = command.ExecuteReader();
+            User user = null;
+            if (reader.Read())
+            {
+                HMACSHA512 hmac = new HMACSHA512((byte[])reader[3]);
+                if (hmac.ComputeHash(Encoding.UTF8.GetBytes(password)).SequenceEqual((byte[])reader[2]))
+                {
+                    user = new User(reader.GetInt32(0), reader.GetString(1), GetRoleByID(reader.GetInt32(4)));
+                }
+            }
+            reader.Close();
+            conn.Close();
+            return user;
+        }
+
+
+
 
         public static void EditEmployee(int id, Employee employee)
         {
@@ -149,7 +204,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Worktypes";
+            cmd.CommandText = "SELECT * FROM WorkType";
             SqlDataReader reader = cmd.ExecuteReader();
             List<WorkType> worktype = new List<WorkType>();
             while (reader.Read())
@@ -166,7 +221,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "INSERT INTO Worktypes (Name, Description) VALUES (@name, @description)";
+            cmd.CommandText = "INSERT INTO Worktype (Name, Description) VALUES (@name, @description)";
             cmd.Parameters.AddWithValue("name", worktype.Name);
             cmd.Parameters.AddWithValue("description", worktype.Description);
             cmd.ExecuteNonQuery();
@@ -178,7 +233,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "UPDATE Worktypes SET Name=@name, Description=@description WHERE id=@id";
+            cmd.CommandText = "UPDATE Worktype SET Name=@name, Description=@description WHERE id=@id";
             cmd.Parameters.AddWithValue("id", id);
             cmd.Parameters.AddWithValue("name", worktype.Name);
             cmd.Parameters.AddWithValue("description", worktype.Description);
@@ -191,22 +246,23 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "DELETE FROM Worktypes WHERE Id=@id";
+            cmd.CommandText = "DELETE FROM Worktype WHERE Id=@id";
             cmd.Parameters.AddWithValue("id", id);
             cmd.ExecuteNonQuery();
             conn.Close();
         }
 
-        public static void RegisterUser(string name, string password)
+        public static void RegisterUser(string name, string password, int roleid)
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             HMACSHA512 hmac = new HMACSHA512();
-            cmd.CommandText = "INSERT INTO users (name,passwordhash,passwordsalt) VALUES (@name,@hash,@salt)";
+            cmd.CommandText = "INSERT INTO users (Name,Hash,Salt,roleid) VALUES (@name,@hash,@salt,@roleid)";
             cmd.Parameters.AddWithValue("name", name);
             cmd.Parameters.AddWithValue("hash", hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
             cmd.Parameters.AddWithValue("salt", hmac.Key);
+            cmd.Parameters.AddWithValue("roleid", roleid);
             cmd.ExecuteNonQuery();
             conn.Close();
         }
@@ -241,7 +297,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "INSERT INTO contracts (ContractNumber, Customer, Description) VALUES (@ContractNumber, @Customer, @Description)";
+            cmd.CommandText = "INSERT INTO contract (ContractNumber, Customer, Description) VALUES (@ContractNumber, @Customer, @Description)";
             cmd.Parameters.AddWithValue("ContractNumber", contractNumber);
             cmd.Parameters.AddWithValue("Customer", Customer); ;
             cmd.Parameters.AddWithValue("Description", Description);
@@ -254,7 +310,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM contracts WHERE ContractNumber = @ContractNumber";
+            cmd.CommandText = "SELECT * FROM contract WHERE ContractNumber = @ContractNumber";
             cmd.Parameters.AddWithValue("ContractNumber", contractNumber);
             SqlDataReader reader = cmd.ExecuteReader();
             Contract contract = null;
@@ -273,7 +329,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Contracts c INNER JOIN iD ON c.ContractNumber = iD WHERE iD = @iD";
+            cmd.CommandText = "SELECT * FROM Contract c INNER JOIN iD ON c.ContractNumber = iD WHERE iD = @iD";
             cmd.Parameters.AddWithValue("iD", iD);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -294,7 +350,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "DELETE FROM contracts WHERE ContractNumber = @ContractNumber AND CreatedDate BETWEEN @StartOfToday AND @EndOfToday";
+            cmd.CommandText = "DELETE FROM contract WHERE ContractNumber = @ContractNumber AND CreatedDate BETWEEN @StartOfToday AND @EndOfToday";
             cmd.Parameters.AddWithValue("contractNumber", contractNumber);
             cmd.Parameters.AddWithValue("StartOfToday", startOfToday);
             cmd.Parameters.AddWithValue("EndOfToday", endOfToday);
@@ -308,7 +364,7 @@ namespace ZaverecnyProjektIT4_2023
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Contracts ORDER BY CreatedDate";
+            cmd.CommandText = "SELECT * FROM Contract ORDER BY CreatedDate";
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {

@@ -28,7 +28,13 @@ namespace ZaverecnyProjektIT4_2023
             Descriptiontxt.Text = worktype.Description;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+
+        private void Descriptiontxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Addbtn_Click(object sender, EventArgs e)
         {
             if (id == -1)
             {
@@ -40,11 +46,6 @@ namespace ZaverecnyProjektIT4_2023
             }
 
             Close();
-        }
-
-        private void Descriptiontxt_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -14,22 +14,26 @@ using ZaverecnyProjektIT4_2023.classes;
 
 namespace ZaverecnyProjektIT4_2023
 {
-    public partial class main : Form
+    public partial class FormMain : Form
     {
+
+        public User LoggedUser { get; }
 
         List<Employee> employees = new List<Employee>();
         List<Contract> contracts = new List<Contract>();
         List<WorkType> worktypes = new List<WorkType>();
 
-        public main()
+        public FormMain(User user)
         {
             InitializeComponent();
+            LoggedUser= user;
             employees = SqlRepository.EmployeeList();
             contracts = SqlRepository.ContractList();
             worktypes = SqlRepository.WorktypeList();
             updateemployee();
             updatecontracts();
             updateworktype();
+            Usernamelbl.Text = LoggedUser.Name;
         }
 
         private void updateemployee()
@@ -68,14 +72,15 @@ namespace ZaverecnyProjektIT4_2023
             formLogin.Close();
         }
 
-        private void EmployeeListview_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EmployeeDltbtn.Enabled = EmployeeListview.SelectedIndices.Count == 1;
-            EmployeeEdtbtn.Enabled = EmployeeListview.SelectedIndices.Count == 1;
+        private void gatherUsersButton_Click_Click(object sender, EventArgs e)
+         {
+            SqlRepository.DeleteContractbyId(int.Parse(ContractListview.SelectedItems[0].Text));
+            updatecontracts();
         }
 
-        private void EmployeeAddbtn_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            
             Form formEmployee = new FormEmployeeAdd();
             formEmployee.ShowDialog();
 
@@ -83,7 +88,7 @@ namespace ZaverecnyProjektIT4_2023
             updateemployee();
         }
 
-        private void EmployeeEdtbtn_Click(object sender, EventArgs e)
+        private void EmployeeEdtbtn_Click_1(object sender, EventArgs e)
         {
             Form formEmployee = new FormEmployeeAdd(employees[EmployeeListview.SelectedIndices[0]]);
             formEmployee.ShowDialog();
@@ -91,18 +96,19 @@ namespace ZaverecnyProjektIT4_2023
             employees = SqlRepository.EmployeeList();
             updateemployee();
         }
-        private void EmployeeDltbtn_Click(object sender, EventArgs e)
+
+        private void EmployeeSearchtxt_TextChanged_1(object sender, EventArgs e)
+        {
+            updateemployee();
+        }
+
+        private void EmployeeDltbtn_Click_1(object sender, EventArgs e)
         {
             SqlRepository.DeleteEmployeebyId(int.Parse(EmployeeListview.SelectedItems[0].Text));
             updateemployee();
         }
 
-        private void EmployeeSearchtxt_TextChanged(object sender, EventArgs e)
-        {
-            updateemployee();
-        }
-
-        private void ContractAddbtn_Click(object sender, EventArgs e)
+        private void ContractAddbtn_Click_1(object sender, EventArgs e)
         {
             Form formContract = new FormContractADD();
             formContract.ShowDialog();
@@ -111,39 +117,7 @@ namespace ZaverecnyProjektIT4_2023
             updatecontracts();
         }
 
-        private void ContractEdtbtn_Click(object sender, EventArgs e)
-        {
-            Form formContract = new FormContractADD(contracts[ContractListview.SelectedIndices[0]]);
-            formContract.ShowDialog();
-
-            contracts = SqlRepository.ContractList();
-            updatecontracts();
-        }
-
-        private void ContractListview_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ContractDltbtn.Enabled = ContractListview.SelectedIndices.Count == 1;
-            ContractEdtbtn.Enabled = ContractListview.SelectedIndices.Count == 1;
-        }
-
-        private void ContractDltbtn_Click(object sender, EventArgs e)
-        {
-            SqlRepository.DeleteContractbyId(int.Parse(ContractListview.SelectedItems[0].Text));
-            updatecontracts();
-        }
-
-        private void ContractSearchtxt_TextChanged(object sender, EventArgs e)
-        {
-            updatecontracts();
-        }
-
-        private void WorkListview_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            WorkDelbtn.Enabled = WorkListview.SelectedIndices.Count == 1;
-            WorkEdtbtn.Enabled = WorkListview.SelectedIndices.Count == 1;
-        }
-
-        private void WorkAddbtn_Click(object sender, EventArgs e)
+        private void WorkAddbtn_Click_1(object sender, EventArgs e)
         {
             Form formWorktype = new FormWorkTypeAdd();
             formWorktype.ShowDialog();
@@ -152,7 +126,7 @@ namespace ZaverecnyProjektIT4_2023
             updateworktype();
         }
 
-        private void WorkEdtbtn_Click(object sender, EventArgs e)
+        private void WorkEdtbtn_Click_1(object sender, EventArgs e)
         {
             Form formWorktype = new FormWorkTypeAdd(worktypes[WorkListview.SelectedIndices[0]]);
             formWorktype.ShowDialog();
@@ -160,7 +134,8 @@ namespace ZaverecnyProjektIT4_2023
             worktypes = SqlRepository.WorktypeList();
             updateworktype();
         }
-        private void WorkDltbtn_Click(object sender, EventArgs e)
+
+        private void WorkDelbtn_Click(object sender, EventArgs e)
         {
             SqlRepository.DeleteWorktypebyId(int.Parse(WorkListview.SelectedItems[0].Text));
             updateworktype();
@@ -171,20 +146,50 @@ namespace ZaverecnyProjektIT4_2023
             updateworktype();
         }
 
-
-
-
-
-
-
-        private void gatherUsersButton_Click_Click(object sender, EventArgs e)
-         {
-            
-         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void ContractEdtbtn_Click_1(object sender, EventArgs e)
         {
+            Form formContract = new FormContractADD(contracts[ContractListview.SelectedIndices[0]]);
+            formContract.ShowDialog();
 
+            contracts = SqlRepository.ContractList();
+            updatecontracts();
+        }
+
+        private void ContractSearchtxt_TextChanged(object sender, EventArgs e)
+        {
+            updatecontracts();
+        }
+
+        private void ContractListview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ContractDltbtn.Enabled = ContractListview.SelectedIndices.Count == 1;
+            ContractEdtbtn.Enabled = ContractListview.SelectedIndices.Count == 1;
+        }
+
+        private void WorkListview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WorkDelbtn.Enabled = WorkListview.SelectedIndices.Count == 1;
+            WorkEdtbtn.Enabled = WorkListview.SelectedIndices.Count == 1;
+        }
+
+        private void EmployeeListview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EmployeeDltbtn.Enabled = EmployeeListview.SelectedIndices.Count == 1;
+            EmployeeEdtbtn.Enabled = EmployeeListview.SelectedIndices.Count == 1;
+        }
+
+        private void ContractEdtbtn_VisibleChanged(object sender, EventArgs e)
+        {
+            if(LoggedUser.Name == "admin")
+            {
+                ContractDltbtn.Visible = true;
+                ContractEdtbtn.Visible = true;
+            }
+            else
+            {
+                ContractDltbtn.Visible = false;
+                ContractEdtbtn.Visible = false;
+            }
         }
     }
 }

@@ -52,6 +52,12 @@
     <Compile Include="classes\User.cs" />
     <Compile Include="classes\WorkHours.cs" />
     <Compile Include="classes\WorkType.cs" />
+    <Compile Include="Forms\FormAddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddUser.Designer.cs">
+      <DependentUpon>FormAddUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormContractADD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
       <DependentUpon>FormEmployeeAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlRepository.cs" />
+    <EmbeddedResource Include="Forms\FormAddUser.resx">
+      <DependentUpon>FormAddUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormContractADD.resx">
       <DependentUpon>FormContractADD.cs</DependentUpon>
     </EmbeddedResource>
