@@ -34,6 +34,19 @@ namespace ZaverecnyProjektIT4_2023
             updatecontracts();
             updateworktype();
             Usernamelbl.Text = LoggedUser.Name;
+            if(LoggedUser.Name == "admin")
+            {
+
+            }
+            else
+            {
+                EmployeeAddbtn.Hide();
+                EmployeeDltbtn.Hide();
+                EmployeeEdtbtn.Hide();
+                ContractAddbtn.Hide();
+                ContractDltbtn.Hide();
+                ContractEdtbtn.Hide();
+            }
         }
 
         private void updateemployee()
@@ -180,16 +193,7 @@ namespace ZaverecnyProjektIT4_2023
 
         private void ContractEdtbtn_VisibleChanged(object sender, EventArgs e)
         {
-            if(LoggedUser.Name == "admin")
-            {
-                ContractDltbtn.Visible = true;
-                ContractEdtbtn.Visible = true;
-            }
-            else
-            {
-                ContractDltbtn.Visible = false;
-                ContractEdtbtn.Visible = false;
-            }
+            
         }
     }
 }
