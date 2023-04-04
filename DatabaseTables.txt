@@ -1,0 +1,48 @@
+CREATE TABLE [dbo].[WorkType] (
+    [id]          INT           IDENTITY (10, 1) NOT NULL,
+    [name]        VARCHAR (255) NOT NULL,
+    [description] VARCHAR (255) NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+CREATE TABLE [dbo].[WorkHours] (
+    [Employee]   INT            NOT NULL,
+    [Contract]   INT            NOT NULL,
+    [WorkType]   VARCHAR (50)   NOT NULL,
+    [Hours]      DECIMAL (5, 2) NOT NULL,
+    [insertdate] DATE           NOT NULL,
+    [insertuser] INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Employee] ASC, [Contract] ASC, [WorkType] ASC)
+);
+
+CREATE TABLE [dbo].[Users] (
+    [ID]     INT             IDENTITY (10, 1) NOT NULL,
+    [Name]   VARCHAR (50)    NOT NULL,
+    [Hash]   VARBINARY (MAX) NOT NULL,
+    [Salt]   VARBINARY (MAX) NOT NULL,
+    [roleid] INT             NULL,
+    PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+CREATE TABLE [dbo].[Role] (
+    [id]        INT           IDENTITY (10, 1) NOT NULL,
+    [name]      NVARCHAR (50) NOT NULL,
+    [permision] BIT           DEFAULT ((0)) NOT NULL
+);
+
+CREATE TABLE [dbo].[Employees] (
+    [id]          INT           IDENTITY (10, 1) NOT NULL,
+    [FirstName]   VARCHAR (50)  NOT NULL,
+    [LastName]    VARCHAR (50)  NOT NULL,
+    [BirthDate]   DATE          NOT NULL,
+    [Email]       VARCHAR (100) NOT NULL,
+    [PhoneNumber] VARCHAR (20)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
+CREATE TABLE [dbo].[Contract] (
+    [id]          INT           IDENTITY (10, 1) NOT NULL,
+    [Customer]    VARCHAR (100) NOT NULL,
+    [Description] VARCHAR (255) NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
